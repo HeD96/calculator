@@ -31,6 +31,7 @@ body {
 
     display: flex;
     flex-direction: column;
+    gap: 1rem;
 
     top: 50%;
     left: 50%;
@@ -44,7 +45,6 @@ body {
 
 .user-input {
     flex: 5;
-    border: 2px solid gray;
 
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -63,6 +63,22 @@ body {
     background-color: rgb(200, 200, 200);
 }
 
+.clear {
+    background-color: red;
+    color: white;
+}
+
+.del {
+    background-color: rgb(190, 190, 190);
+}
+
+.operator {
+    background-color: gray;
+    color: white;
+}
+
 .equal {
     grid-row: span 2;
+    background-color: blue;
+    color: white;
 }
