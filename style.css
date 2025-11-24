@@ -40,8 +40,30 @@ body {
 
 .display {
     flex: 2;
+
     border: 2px solid blue;
+
+    display: flex;
+    flex-direction: column;
 }
+
+.end-value {
+    flex: 1;
+
+    font-size: 2.5rem;
+    text-align: end;
+
+    color: rgb(85, 85, 85);
+}
+
+.values {
+    flex: 1;
+
+    bottom: 0;
+    display: block;
+    font-size: 3rem;
+    text-align: end;
+}   
 
 .user-input {
     flex: 5;
