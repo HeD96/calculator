@@ -17,30 +17,47 @@ class Calculator {
 }
 
 function userInput() {
-    let operator = "";
-    let firstNum = 0;
-    let secondNum = 0;
+    let operatorUsed = "";
+    let next = false;
+    let firstNum = "";
+    let secondNum = "";
     let result = 0;
 
-    while (operator !== "x") {
-        if (operator === "") operator = prompt("введите действие");
-        if (result === 0) firstNum = parseInt(prompt("первое число"));
-        secondNum = parseInt(prompt("второе число"));
+    const nums = [...document.querySelectorAll(".num")];
+    
+    nums.forEach(num => {
+        num.addEventListener("click", () => {
+            if (next === false) {
+                firstNum += num.value;
+            }
 
-        if (operator === "+") result = Calculator.sum(firstNum, secondNum);
-        if (operator === "-") result = Calculator.sub(firstNum, secondNum);
-        if (operator === "/") result = Calculator.div(firstNum, secondNum);                
-        if (operator === "*") result = Calculator.mult(firstNum, secondNum);
+            if (next === true) {
+                secondNum += num.value;
+            }
+        });
+    });
 
-        firstNum = result;
-        console.log(result);
+    const operators = [...document.querySelectorAll(".operator")];
 
-        operator = prompt("введите действие");
-    }
+    operators.forEach(operator => {
+        operator.addEventListener("click", () => {
+            if (next === false) {
+                next = true;
+                console.log(firstNum);
+            } else if (next === true) {
+                next = false;
+                console.log(secondNum);
+            }
 
-    return result;
+            operatorUsed = operator.value;
+            console.log(operatorUsed);
+        });
+    });
 }
 
-function output() {
+userInput();
 
+function output(value) {
+    const display = document.querySelector(".values");
+    display.textContent += value;
 }
