@@ -18,7 +18,8 @@ class Calculator {
 
 function userInput() {
     let operatorUsed = "";
-    let next = false;
+    let nextNum = false;
+    let toCalc = false;
     let firstNum = "";
     let secondNum = "";
     let result = 0;
@@ -27,12 +28,14 @@ function userInput() {
     
     nums.forEach(num => {
         num.addEventListener("click", () => {
-            if (next === false) {
+            if (nextNum === false) {
                 firstNum += num.value;
+                output(num.value);
             }
 
-            if (next === true) {
+            if (nextNum === true) {
                 secondNum += num.value;
+                output(num.value);
             }
         });
     });
@@ -41,16 +44,33 @@ function userInput() {
 
     operators.forEach(operator => {
         operator.addEventListener("click", () => {
-            if (next === false) {
-                next = true;
+            if (nextNum === false) {
+                nextNum = true;
                 console.log(firstNum);
-            } else if (next === true) {
-                next = false;
+            } else if (nextNum === true) {
                 console.log(secondNum);
             }
 
-            operatorUsed = operator.value;
-            console.log(operatorUsed);
+            if (toCalc === false) {
+                operatorUsed = operator.value;
+                console.log(operatorUsed);
+                output(operatorUsed);
+                toCalc = true;
+            } else if (toCalc === true) {
+                if (operatorUsed === "+") {
+                    result = Calculator.sum(parseInt(firstNum), parseInt(secondNum));
+                }
+                console.log(result);
+                firstNum = result.toString();
+                secondNum = "";
+
+                operatorUsed = operator.value;
+                outputResult(result);
+                console.log(operatorUsed);
+                output(operatorUsed);
+            }
+
+            
         });
     });
 }
@@ -60,4 +80,9 @@ userInput();
 function output(value) {
     const display = document.querySelector(".values");
     display.textContent += value;
+}
+
+function outputResult(value) {
+    const display = document.querySelector(".values");
+    display.textContent = value;
 }
